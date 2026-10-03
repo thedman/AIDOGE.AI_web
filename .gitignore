@@ -2,6 +2,7 @@ node_modules/
 dist/
 .env
 .env.local
+/archive_rpc.secret
 *.log
 
 # Generated bundle profiling artifacts
