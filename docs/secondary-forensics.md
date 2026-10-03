@@ -1,5 +1,13 @@
 # Secondary candidate verification - 2026-10-03
 
+## Historical claim routing corroboration
+
+Receipt and transaction re-read for `0x871bab18ad02db7ec3bbd822be9e005f56a038d097084e9532b955d450ac851d` confirmed success at block 511349453, router target `0xb38f360234ec6e79676eea7a766100f82004b6a3`, and selector `0xd1058e59`. ERC-20 Transfer logs to the investigated holder recorded 13173127778561914195 raw AIDOGE from `0x78a0baa38c1859133ea8bb979e7150bca8d0c410`, 217840326254894071474 raw AICODE v2 from `0x6365b66997502a49c89ced0e81d553dbc24101ec`, and 96622180127909694720 raw ARB from `0xd7c78a327513c1ae16ff991a624a4c2820762cb6`.
+
+Matrix GO status is limited to historical router mapping and reconstructed rewarder reads already used for unverified weekly estimates. This does not establish verified source, absence of admin controls, general claim safety, or withdrawal mechanics. All writes remain HOLD. Router GO mapping does not enable a router claimable-balance query.
+
+Intermediate zero ARB Transfer logs run from the AIDOGE token contract to distribution recipients, not from the ARB rewarder to the holder. They therefore do not by themselves prove an individual rewarder returned a zero payout. Swap-related and LP Transfer logs exist, but exact internal caller sequencing and venue attribution require trace/source evidence. Historical receipt events are not pre/post balance-diff verification.
+
 Chain: Arbitrum One (42161). Endpoints: https://arb1.arbitrum.io/rpc and https://arbitrum-one-rpc.publicnode.com.
 
 At blocks 511406052 (primary) and 511406057 (backup), `eth_getCode` returned:

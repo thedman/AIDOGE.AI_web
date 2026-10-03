@@ -16,6 +16,21 @@ it('keeps every contract write status on HOLD', () => {
   expect(contractAudits.every(audit => audit.writeStatus === 'HOLD' && audit.verifiedWriteMethods.length === 0)).toBe(true)
 })
 
+it('limits rewarder GO status to reconstructed reads, not source verification', () => {
+  const rewarders = contractAudits.filter(audit => audit.contractName.endsWith('rewarder'))
+  expect(rewarders).toHaveLength(3)
+  for (const audit of rewarders) {
+    expect(audit.readStatus).toBe('GO')
+    expect(audit.isVerified).toBeNull()
+    expect(audit.verifiedReadMethods).toContain('weekCursorOf')
+    expect(audit.verifiedWriteMethods).toEqual([])
+  }
+  const router = contractAudits.find(audit => audit.contractName.startsWith('Claim router'))!
+  expect(router.readStatus).toBe('GO')
+  expect(router.verifiedReadMethods).toEqual([])
+  expect(router.isVerified).toBeNull()
+})
+
 it('does not infer an ecosystem distribution link from ARB identity reads', () => {
   const arb = contractAudits.find(audit => audit.contractName === 'ARB distribution candidate')!
   expect(arb.bytecodeBytes).toBeGreaterThan(0)
