@@ -1,0 +1,8 @@
+.dashboard-status { display: flex; align-items: center; gap: 16px; justify-content: space-between; }
+body:has(dialog[open]) { overflow: hidden; }
+.refresh-button { width: 40px; height: 40px; flex: 0 0 40px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 4px; background: transparent; color: var(--ink); cursor: pointer; }
+.refresh-button:disabled { opacity: .5; cursor: wait; }
+.refresh-button:focus-visible { outline: 2px solid #29ddad; outline-offset: 3px; }
+.refreshing { animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .refreshing { animation: none; } }
