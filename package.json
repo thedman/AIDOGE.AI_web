@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "profile:bundle": "node scripts/profile-bundle.mjs",
+    "observe:fork": "node scripts/fork-observation.mjs",
     "preview": "vite preview",
     "test": "vitest run"
   },
