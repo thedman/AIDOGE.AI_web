@@ -3,3 +3,6 @@ dist/
 .env
 .env.local
 *.log
+
+# Generated bundle profiling artifacts
+/reports/
