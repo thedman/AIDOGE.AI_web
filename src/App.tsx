@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { TokenDashboard } from "./components/TokenDashboard"
 import { WalletConnect } from "./components/WalletConnect"
+import { VaultDashboard } from "./components/VaultDashboard"
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -22,6 +23,7 @@ export default function App() {
       <a className="active" href="#home">Home</a>
       <a href="#token">AIDOGE</a>
       <a href="#forensics">Forensics</a>
+      <a href="#vaults">Vaults</a>
       <a href="#tokenomics">Tokenomics</a>
       <a href="#ecosystem">Ecosystem</a>
       <a href="#resources">Resources</a>
@@ -103,6 +105,7 @@ export default function App() {
     </section>
 
     <TokenDashboard />
+    <VaultDashboard />
 
     <section className="content-section ecosystem-section" id="ecosystem" aria-labelledby="ecosystem-title">
       <div className="section-heading">

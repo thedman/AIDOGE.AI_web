@@ -19,8 +19,24 @@ beforeEach(() => {
   mocks.account.enabled = false
   mocks.connect.error = null
   mocks.switchChain.error = null
+  mocks.connectors[0].name = 'Test browser wallet'
+  mocks.connectors[0].getProvider.mockResolvedValue({})
   HTMLDialogElement.prototype.showModal = function () { this.setAttribute('open', '') }
   HTMLDialogElement.prototype.close = function () { this.removeAttribute('open') }
+})
+it('labels the generic injected connector without implying a wallet brand', async () => {
+  mocks.connectors[0].name = 'Injected'
+  render(<WalletConnect />)
+  fireEvent.click(screen.getByRole('button', { name: 'Connect Wallet' }))
+  const option = screen.getByRole('button', { name: 'Connect Browser wallet' })
+  await waitFor(() => expect((option as HTMLButtonElement).disabled).toBe(false))
+  expect(screen.queryByRole('button', { name: 'Connect Injected' })).toBeNull()
+})
+it.each(['MetaMask', 'Trust Wallet'])('preserves the discovered %s wallet name', async name => {
+  mocks.connectors[0].name = name
+  render(<WalletConnect />)
+  fireEvent.click(screen.getByRole('button', { name: 'Connect Wallet' }))
+  await waitFor(() => expect((screen.getByRole('button', { name: `Connect ${name}` }) as HTMLButtonElement).disabled).toBe(false))
 })
 it('connects only after a user clicks the detected wallet', async () => {
   render(<WalletConnect />)

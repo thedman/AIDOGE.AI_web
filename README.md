@@ -26,7 +26,7 @@ Then open `http://127.0.0.1:5173/AIDOGE.AI_web/`. Run `npm run build` for TypeSc
 - AIDOGE token: `0x09E18590E8f76b6Cf471b3cd75fE1A1a9D2B2c2b`
 - Verified read calls in this reconstruction: `decimals()`, `totalSupply()`, `balanceOf(0x000000000000000000000000000000000000dEaD)`, and `owner()`.
 - `owner()` currently returns the zero address when read from Arbitrum One.
-- Secondary AICODE, staking/vault, and NFT contract addresses were not present in the local static archive and remain on HOLD until extracted from an original bundle or verified source.
+- Supplied AICODE, staking/vault, and Camelot LP candidates returned no bytecode on two Arbitrum RPC endpoints and remain on HOLD. NFT address is unconfirmed. See [candidate evidence](docs/secondary-forensics.md) for block numbers, limitations, and provenance requirements.
 - Wagmi/viem multicall uses fallback transports at `https://arb1.arbitrum.io/rpc` and `https://arbitrum-one-rpc.publicnode.com`.
 - TanStack Query polls every 12 seconds while active; this is a refresh interval, not an Arbitrum block-time claim. The refresh button requests an immediate update.
 - Failed reads remain unavailable. Previously successful data is retained and marked stale when refresh fails.

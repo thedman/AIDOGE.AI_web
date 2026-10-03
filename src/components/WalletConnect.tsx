@@ -44,9 +44,9 @@ export function WalletConnect() {
       {!account.isConnected ? <div className="wallet-options">
         {account.isReconnecting && <p role="status">Reconnecting to wallet...</p>}
         {connectors.map(connector => <button className="button button-primary" key={connector.uid} disabled={connect.isPending || account.isReconnecting || !available[connector.uid]} onClick={() => connect.mutate({ connector })}>
-          <Wallet size={18} aria-hidden="true" />{connect.isPending && connect.variables?.connector === connector ? 'Connecting...' : `Connect ${connector.name}`}
+          <Wallet size={18} aria-hidden="true" />{connect.isPending && connect.variables?.connector === connector ? 'Connecting...' : `Connect ${connector.name === 'Injected' ? 'Browser wallet' : connector.name}`}
         </button>)}
-        {!connectors.some(connector => available[connector.uid]) && <p role="status">No browser wallet detected. Open this page in a browser with MetaMask, Rabby, or Frame.</p>}
+        {!connectors.some(connector => available[connector.uid]) && <p role="status">No browser wallet detected. Open this page in a browser with MetaMask, Trust Wallet, Rabby, or Frame.</p>}
       </div> : <>
         <p className="wallet-address" title={account.address}>{shortAddress}</p>
         {!account.enabled ? <div className="network-warning" role="alert">

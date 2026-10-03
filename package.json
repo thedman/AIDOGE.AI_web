@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
+    "profile:bundle": "node scripts/profile-bundle.mjs",
     "preview": "vite preview",
     "test": "vitest run"
   },
