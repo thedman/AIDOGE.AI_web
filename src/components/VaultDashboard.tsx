@@ -1,5 +1,6 @@
 import { formatUnits } from 'viem'
 import { useVaultPositions } from '../hooks/useVaultPositions'
+import { RewardEstimates } from './RewardEstimates'
 
 export function VaultDashboard() {
   const state = useVaultPositions()
@@ -18,5 +19,6 @@ export function VaultDashboard() {
         </dl>
       </article>)}</div><p role="status">Block {state.data.blockNumber.toString()}{state.isFetching ? ' - refreshing' : ''}</p></>}
     <p>Claims, deposits and withdrawals remain on HOLD. Early withdrawal penalties and exact claimable payouts have not been verified.</p>
+    <RewardEstimates />
   </section>
 }
