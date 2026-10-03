@@ -11,7 +11,7 @@ npm install
 npm run dev -- --host 127.0.0.1 --port 5173
 ```
 
-Then open `http://127.0.0.1:5173`. Run `npm run build` for TypeScript validation and a production build. `npm run preview` serves the build.
+Then open `http://127.0.0.1:5173/AIDOGE.AI_web/`. Run `npm run build` for TypeScript validation and a production build. `npm run preview` serves the build at the same repository subpath.
 
 ## Scope
 
@@ -49,6 +49,14 @@ Open the Vite URL in a browser with MetaMask, Rabby, or Frame and choose Connect
 Injected wallets work without a WalletConnect project ID. Remote QR connections and standalone Coinbase SDK connections are not configured; Coinbase's injected browser extension can be discovered like other browser wallets.
 
 The 12-second polling interval is an application refresh policy, not Arbitrum's block cadence. No contract write, simulation, transaction-send, or signing hooks are used. Run `npm test` for account, network, disconnect, and failure-state tests using mocked hook responses. Actual extension authorization and switching still require a browser wallet.
+
+## GitHub Pages deployment
+
+Public URL: https://thedman.github.io/AIDOGE.AI_web/
+
+The deployment workflow installs locked dependencies with Node 24, runs all tests, builds, and uploads `dist` before deploying with GitHub Pages. Pushes to `main` and manual workflow runs deploy; pull requests only validate. The deploy job alone receives Pages and OIDC write permissions. Repository Settings > Pages must use GitHub Actions as its source.
+
+Manual browser-wallet verification remains pending: account discovery, wrong-network switching, disconnect, and polling need a real extension. Automated tests exercise the injected connector with a test EIP-1193 provider and check personal-read isolation. Disconnect clears the active Wagmi connection; it does not erase browser-wallet authorization or all application storage.
 
 ## Archival basis
 

@@ -8,6 +8,7 @@ import './styles/archive.css'
 import './styles/dashboard.css'
 
 const queryClient = new QueryClient()
+document.documentElement.style.setProperty('--archive-background', `url("${import.meta.env.BASE_URL}assets/background2.jpg")`)
 createRoot(document.getElementById('root')!).render(
   <StrictMode><WagmiProvider config={config}><QueryClientProvider client={queryClient}><App /></QueryClientProvider></WagmiProvider></StrictMode>,
 )

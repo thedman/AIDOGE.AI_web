@@ -140,7 +140,7 @@ img { display: block; max-width: 100%; }
   position: absolute;
   inset: 0;
   z-index: -2;
-  background: url("/assets/background2.jpg") center 58% / cover no-repeat;
+  background: var(--archive-background) center 58% / cover no-repeat;
 }
 
 .hero::after {
@@ -408,7 +408,7 @@ img { display: block; max-width: 100%; }
   overflow: hidden;
 }
 
-.community-image { position: absolute; inset: 0; background: url("/assets/background2.jpg") center / cover no-repeat; opacity: 0.42; }
+.community-image { position: absolute; inset: 0; background: var(--archive-background) center / cover no-repeat; opacity: 0.42; }
 .community-section::after { content: ""; position: absolute; inset: 0; background: rgba(5, 8, 22, 0.62); }
 .community-content { position: relative; z-index: 1; width: min(850px, calc(100% - 48px)); margin: 0 auto; text-align: center; }
 .community-content h2 { margin: 0; font-size: 4.6rem; line-height: 1.08; }
