@@ -1,9 +1,9 @@
-import { useRef, useState } from "react"
+import { useState } from "react"
 import { TokenDashboard } from "./components/TokenDashboard"
+import { WalletConnect } from "./components/WalletConnect"
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const dialogRef = useRef<HTMLDialogElement>(null)
   return <>
   <a className="skip-link" href="#main">Skip to content</a>
 
@@ -27,7 +27,7 @@ export default function App() {
       <a href="#resources">Resources</a>
     </nav>
 
-    <button className="wallet-button" type="button" onClick={() => dialogRef.current?.showModal()}>Connect Wallet</button>
+    <WalletConnect />
   </header>
 
   <main id="main">
@@ -41,7 +41,7 @@ export default function App() {
           <a className="button button-primary" href="#token">Explore AIDOGE</a>
           <a className="button button-secondary" href="https://web.archive.org/web/20241114003227/https://arbdoge.ai/" target="_blank" rel="noopener noreferrer">View archived site</a>
         </div>
-        <p className="archive-note"><span aria-hidden="true">●</span> Local archival reconstruction — blockchain actions are disabled</p>
+        <p className="archive-note"><span aria-hidden="true">●</span> Local archival reconstruction — read-only wallet balances</p>
       </div>
     </section>
 
@@ -177,15 +177,7 @@ export default function App() {
     <p className="copyright">© 2023 Arbitrum Doge Paradise. Archival reconstruction for local reference.</p>
   </footer>
 
-  <dialog className="archive-dialog" ref={dialogRef} onClick={(event) => { if (event.target === event.currentTarget) dialogRef.current?.close() }} id="wallet-dialog" aria-labelledby="wallet-title">
-    <button className="dialog-close" type="button" onClick={() => dialogRef.current?.close()} aria-label="Close">×</button>
-    <img src="assets/logo.svg" alt="" width="64" height="64" />
-    <h2 id="wallet-title">Wallet connections are disabled</h2>
-    <p>This local reconstruction keeps wallet connections disabled. It only performs public read-only calls to Arbitrum and cannot initiate transactions.</p>
-    <button className="button button-primary" type="button" onClick={() => dialogRef.current?.close()}>Understood</button>
-  </dialog>
 
   
 </>
 }
-

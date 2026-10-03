@@ -18,7 +18,7 @@ Then open `http://127.0.0.1:5173`. Run `npm run build` for TypeScript validation
 - Reconstructs the public homepage, navigation, token overview, tokenomics, statistics, ecosystem cards, and footer.
 - Uses archived public imagery recovered from the former website.
 - Adds read-only Arbitrum One contract checks for the AIDOGE token dashboard.
-- Does not connect wallets, execute blockchain transactions, purchase tokens, or provide staking functionality.
+- Connects injected browser wallets for public ETH and AIDOGE balance reads on Arbitrum One. Does not execute transactions, sign messages, purchase tokens, or provide staking functionality.
 - External links are preserved only where their historical destination is known and useful.
 
 ## Contract forensics status
@@ -36,11 +36,19 @@ Then open `http://127.0.0.1:5173`. Run `npm run build` for TypeScript validation
 ## Component architecture
 
 - `src/abi/aidogeAbi.ts`: typed read-only ABI and addresses.
-- `src/config/`: Arbitrum One and connector-free Wagmi configuration.
+- `src/config/`: Arbitrum One and injected-wallet Wagmi configuration, including EIP-6963 wallet discovery.
 - `src/hooks/useAidogeStats.ts`: batched reads and derived supply.
 - `src/components/`: TokenDashboard, MetricCard, and ContractMatrix.
 - `src/App.tsx`: archived page, React navigation, and native dialog.
 - `src/styles/`: page styling and dashboard controls.
+
+## Wallet connectivity
+
+Open the Vite URL in a browser with MetaMask, Rabby, or Frame and choose Connect Wallet. Wallet connection requests account access only. Switching networks is explicitly initiated with Switch to Arbitrum One. ETH and AIDOGE reads are pinned to chain 42161 and disabled on other networks; cached personal values are hidden immediately on disconnect or unsupported-chain changes. Personal queries are keyed by address and expire when unused.
+
+Injected wallets work without a WalletConnect project ID. Remote QR connections and standalone Coinbase SDK connections are not configured; Coinbase's injected browser extension can be discovered like other browser wallets.
+
+The 12-second polling interval is an application refresh policy, not Arbitrum's block cadence. No contract write, simulation, transaction-send, or signing hooks are used. Run `npm test` for account, network, disconnect, and failure-state tests using mocked hook responses. Actual extension authorization and switching still require a browser wallet.
 
 ## Archival basis
 
