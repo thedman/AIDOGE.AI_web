@@ -1,12 +1,13 @@
 import { formatUnits } from 'viem'
 import { useVaultPositions } from '../hooks/useVaultPositions'
 import { RewardEstimates } from './RewardEstimates'
+import { Wallet } from 'lucide-react'
 
-export function VaultDashboard() {
+export function VaultDashboard({ onConnect }: { onConnect?: () => void }) {
   const state = useVaultPositions()
   return <section className="stats-section" id="vaults" aria-labelledby="vault-title">
     <div className="section-heading compact"><p className="section-label">Arbitrum One</p><h2 id="vault-title">Vault positions</h2></div>
-    {!state.enabled ? <p role="status">{state.isConnected ? 'Switch to Arbitrum One to view positions.' : 'Connect a wallet to view positions.'}</p>
+    {!state.enabled ? <div className="vault-empty"><Wallet size={28} aria-hidden="true" /><h3>{state.isConnected ? 'Arbitrum One required' : 'Your vault positions'}</h3><p role="status">{state.isConnected ? 'Switch to Arbitrum One to view positions.' : 'Connect a wallet to view vault positions.'}</p>{!state.isConnected && onConnect && <button className="wallet-trigger" onClick={onConnect}><Wallet size={18} aria-hidden="true" />Connect Wallet</button>}</div>
       : state.isError ? <p className="wallet-error" role="alert">Vault reads unavailable. {state.error.message}</p>
       : !state.data ? <p role="status">Loading vault positions...</p>
       : <><div className="vault-positions">{state.data.positions.map(position => <article key={position.address}>
@@ -18,7 +19,7 @@ export function VaultDashboard() {
           <div><dt>Claimable rewards</dt><dd>Unavailable</dd></div>
         </dl>
       </article>)}</div><p role="status">Block {state.data.blockNumber.toString()}{state.isFetching ? ' - refreshing' : ''}</p></>}
-    <p>Claims, deposits and withdrawals remain on HOLD. Early withdrawal may substantially reduce the tokens returned. The penalty formula, maximum deduction and calldata parameter meaning remain unverified. Exact claimable payouts have not been verified.</p>
     <RewardEstimates />
+    <p className="vault-disclosure">Claims, deposits and withdrawals remain on HOLD. Early withdrawal may substantially reduce the tokens returned. The penalty formula, maximum deduction and calldata parameter meaning remain unverified. Exact claimable payouts have not been verified.</p>
   </section>
 }

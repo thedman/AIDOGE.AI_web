@@ -3,9 +3,13 @@ import { BookOpen } from 'lucide-react'
 import { TokenDashboard } from "./components/TokenDashboard"
 import { WalletConnect } from "./components/WalletConnect"
 import { VaultDashboard } from "./components/VaultDashboard"
+import { ContractMatrix } from './components/ContractMatrix'
+import { useConnection } from 'wagmi'
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [walletRequest, setWalletRequest] = useState(0)
+  const connection = useConnection()
   return <>
   <a className="skip-link" href="#main">Skip to content</a>
 
@@ -30,15 +34,19 @@ export default function App() {
       <a href="#resources">Resources</a>
     </nav>
 
-    <WalletConnect />
+    <div className="header-account"><span className="header-network" data-state={connection.isConnected && connection.chainId !== 42161 ? 'wrong' : 'ready'}>{connection.isConnected && connection.chainId !== 42161 ? 'Unsupported network' : 'Arbitrum One'}</span>
+    <WalletConnect openRequest={walletRequest} /></div>
   </header>
 
   <main id="main">
+    <TokenDashboard />
+    <VaultDashboard onConnect={() => setWalletRequest(value => value + 1)} />
+    <section className="stats-section" id="forensics" aria-labelledby="matrix-title"><ContractMatrix /></section>
     <section className="hero" aria-labelledby="hero-title">
       <div className="hero-background" aria-hidden="true"></div>
       <div className="hero-content">
         <p className="eyebrow">Proudly launched on Arbitrum</p>
-        <h1 id="hero-title">Co-built by AI creatures and our community</h1>
+        <h2 id="hero-title">Co-built by AI creatures and our community</h2>
         <p className="hero-copy">ArbDoge.AI was an experimental community ecosystem built around AIDOGE, AICODE, NFTs, staking and on-chain applications.</p>
         <div className="hero-actions">
           <a className="button button-primary" href="#token">Explore AIDOGE</a>
@@ -104,9 +112,6 @@ export default function App() {
         </dl>
       </div>
     </section>
-
-    <TokenDashboard />
-    <VaultDashboard />
 
     <section className="content-section ecosystem-section" id="ecosystem" aria-labelledby="ecosystem-title">
       <div className="section-heading">

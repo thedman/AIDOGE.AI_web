@@ -5,7 +5,7 @@ import { LogOut, Wallet, X } from 'lucide-react'
 import { arbitrum } from '../config/chains'
 import { useUserAidogeBalance } from '../hooks/useUserAidogeBalance'
 
-export function WalletConnect() {
+export function WalletConnect({ openRequest = 0 }: { openRequest?: number }) {
   const account = useUserAidogeBalance()
   const connectors = useConnectors()
   const connect = useConnect()
@@ -13,6 +13,9 @@ export function WalletConnect() {
   const switchChain = useSwitchChain()
   const dialog = useRef<HTMLDialogElement>(null)
   const [available, setAvailable] = useState<Record<string, boolean>>({})
+  useEffect(() => {
+    if (openRequest > 0) dialog.current?.showModal()
+  }, [openRequest])
   useEffect(() => {
     let active = true
     void Promise.all(connectors.map(async connector => [connector.uid, !!await connector.getProvider()] as const))

@@ -2,7 +2,6 @@ import { RefreshCw } from 'lucide-react'
 import { formatUnits, zeroAddress } from 'viem'
 import { useAidogeStats } from '../hooks/useAidogeStats'
 import { MetricCard, formatTokenAmount } from './MetricCard'
-import { ContractMatrix } from './ContractMatrix'
 
 export function TokenDashboard() {
   const stats = useAidogeStats()
@@ -13,8 +12,8 @@ export function TokenDashboard() {
   const owner = stats.owner === undefined ? stats.isPending ? 'Loading' : 'Unavailable'
     : stats.owner.toLowerCase() === zeroAddress ? 'Renounced' : 'Owner set'
   const failed = stats.isError || stats.incomplete
-  return <section className="stats-section" id="forensics" aria-labelledby="stats-title">
-    <div className="section-heading compact"><p className="section-label">Arbitrum One</p><h2 id="stats-title">Read-only Arbitrum dashboard</h2><p>Public token supply and ownership data. Circulating supply is total supply minus the dead-wallet balance.</p></div>
+  return <section className="stats-section dashboard-overview" id="overview" aria-labelledby="stats-title">
+    <div className="section-heading compact"><p className="section-label">Arbitrum One · Read-only</p><h1 id="stats-title">ArbDoge.AI</h1><p>Public token supply and ownership data. Circulating supply is total supply minus the dead-wallet balance.</p></div>
     <div className="stats-grid" aria-busy={stats.isFetching}>
       <MetricCard label="Total supply" value={amount(stats.totalSupply)} detail={exact(stats.totalSupply)} />
       <MetricCard label="Dead-wallet balance" value={amount(stats.burnBalance)} detail={exact(stats.burnBalance)} />
@@ -27,6 +26,5 @@ export function TokenDashboard() {
       </p>
       <button className="refresh-button" type="button" title="Refresh token data" aria-label="Refresh token data" disabled={stats.isFetching} onClick={() => void stats.refetch()}><RefreshCw size={18} className={stats.isFetching ? 'refreshing' : ''} /></button>
     </div>
-    <ContractMatrix />
   </section>
 }

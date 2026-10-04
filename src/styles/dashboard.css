@@ -1,4 +1,14 @@
 .dashboard-status { display: flex; align-items: center; gap: 16px; justify-content: space-between; }
+.dashboard-overview { padding-top: 48px; }
+.dashboard-overview h1 { font-size: 2rem; line-height: 1.2; margin: 12px 0; }
+.header-network { color: var(--cyan); font-size: .75rem; white-space: nowrap; }
+.header-account { display: flex; align-items: center; gap: 12px; }
+.header-network[data-state="wrong"] { color: #eeb84a; }
+.vault-empty { min-height: 220px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 12px; padding-block: 24px; border-block: 1px solid var(--line); }
+.vault-empty h3, .vault-empty p { margin: 0; }
+.vault-empty > svg { color: var(--cyan); }
+.vault-disclosure { border-left: 3px solid #eeb84a; padding: 12px 16px; background: rgb(238 184 74 / .06); line-height: 1.6; }
+@media (max-width: 1100px) { .header-network { display: none; } }
 body:has(dialog[open]) { overflow: hidden; }
 .refresh-button { width: 40px; height: 40px; flex: 0 0 40px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 4px; background: transparent; color: var(--ink); cursor: pointer; }
 .refresh-button:disabled { opacity: .5; cursor: wait; }
