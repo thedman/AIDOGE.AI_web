@@ -22,6 +22,17 @@ body:has(dialog[open]) { overflow: hidden; }
 .account-balances > div { padding: 14px 0; border-bottom: 1px solid var(--line); }
 .account-balances dt { color: var(--subtle); font-size: .875rem; }
 .account-balances dd { margin: 6px 0 0; font-size: 1.1rem; overflow-wrap: anywhere; }
+.vault-positions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-block: 1px solid var(--line); }
+.vault-positions > article { min-width: 0; padding: 24px; }
+.vault-positions > article + article { border-left: 1px solid var(--line); }
+.vault-positions h3 { margin: 0; font-size: 1.1rem; }
+.vault-positions .account-balances { margin: 16px 0 0; }
+.vault-positions .account-balances dd { font-variant-numeric: tabular-nums; line-height: 1.5; }
+@media (max-width: 767px) {
+  .vault-positions { grid-template-columns: minmax(0, 1fr); }
+  .vault-positions > article { padding: 24px 0; }
+  .vault-positions > article + article { border-left: 0; border-top: 1px solid var(--line); }
+}
 .network-warning { padding: 16px; border-left: 3px solid #eeb84a; background: rgb(238 184 74 / .08); margin-block: 20px; }
 .network-warning strong { display: block; font-size: 1rem; }
 .network-warning .button { white-space: normal; width: 100%; }

@@ -9,7 +9,7 @@ export function VaultDashboard() {
     {!state.enabled ? <p role="status">{state.isConnected ? 'Switch to Arbitrum One to view positions.' : 'Connect a wallet to view positions.'}</p>
       : state.isError ? <p className="wallet-error" role="alert">Vault reads unavailable. {state.error.message}</p>
       : !state.data ? <p role="status">Loading vault positions...</p>
-      : <><div className="stats-grid">{state.data.positions.map(position => <article key={position.address}>
+      : <><div className="vault-positions">{state.data.positions.map(position => <article key={position.address}>
         <h3>{position.name}</h3>
         <dl className="account-balances">
           <div><dt>Locked principal</dt><dd>{formatUnits(position.principal, position.decimals)} {position.name}</dd></div>
