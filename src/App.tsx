@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { BookOpen } from 'lucide-react'
 import { TokenDashboard } from "./components/TokenDashboard"
 import { WalletConnect } from "./components/WalletConnect"
 import { VaultDashboard } from "./components/VaultDashboard"
@@ -149,10 +150,10 @@ export default function App() {
         <h2 id="community-title">“The secret weapon that humans have over AI is intuition.”</h2>
         <p>The original homepage closed with an invitation to join its community. These links point to the project’s historical public channels and archives.</p>
         <div className="resource-links">
-          <a href="https://x.com/ArbDoge_AI" target="_blank" rel="noopener noreferrer">X / Twitter</a>
-          <a href="https://medium.com/@ArbDogeAI" target="_blank" rel="noopener noreferrer">Medium</a>
-          <a href="https://discord.gg/ZvANqJzPm" target="_blank" rel="noopener noreferrer">Discord</a>
-          <a href="https://web.archive.org/web/20241114003228/https://docs.arbdoge.ai/" target="_blank" rel="noopener noreferrer">Whitepaper archive</a>
+          <a href="https://x.com/ArbDoge_AI" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter" title="X / Twitter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg></a>
+          <a href="https://medium.com/@ArbDogeAI" target="_blank" rel="noopener noreferrer" aria-label="Medium" title="Medium"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="6.8" cy="12" rx="6.8" ry="6.8"/><ellipse cx="17.6" cy="12" rx="3.4" ry="6.4"/><ellipse cx="22.8" cy="12" rx="1.2" ry="5.8"/></svg></a>
+          <a href="https://discord.gg/ZvANqJzPm" target="_blank" rel="noopener noreferrer" aria-label="Discord community" title="Discord community"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515l-.608 1.25a18.27 18.27 0 0 0-5.487 0l-.617-1.25A19.736 19.736 0 0 0 3.677 4.37C.533 9.046-.32 13.58.099 18.057a19.9 19.9 0 0 0 5.993 3.03c.462-.63.874-1.295 1.226-1.994a13.107 13.107 0 0 1-1.872-.892l.372-.292c3.928 1.793 8.18 1.793 12.061 0l.373.292a12.299 12.299 0 0 1-1.873.892c.36.698.772 1.362 1.225 1.993a19.839 19.839 0 0 0 6.002-3.03c.5-5.177-.838-9.674-3.549-13.66zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419s.956-2.419 2.157-2.419 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419s.955-2.419 2.157-2.419 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+          <a href="https://web.archive.org/web/20241114003228/https://docs.arbdoge.ai/" target="_blank" rel="noopener noreferrer" aria-label="Whitepaper archive" title="Whitepaper archive"><BookOpen size={24} aria-hidden="true" /></a>
         </div>
       </div>
     </section>
