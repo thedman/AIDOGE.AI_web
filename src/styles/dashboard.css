@@ -19,6 +19,9 @@
 .vault-empty h3, .vault-empty p { margin: 0; }
 .vault-empty > svg { color: var(--cyan); }
 .vault-disclosure { border-left: 3px solid #eeb84a; padding: 12px 16px; background: rgb(238 184 74 / .06); line-height: 1.6; }
+#vaults.stats-section { padding-bottom: 24px; border-bottom: 0; }
+#forensics.stats-section { padding-top: 32px; }
+#forensics > .forensics-panel { margin-top: 0; padding-top: 0; border-top: 0; }
 @media (max-width: 1100px) { .header-network { display: none; } }
 body:has(dialog[open]) { overflow: hidden; }
 .refresh-button { width: 40px; height: 40px; flex: 0 0 40px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 4px; background: transparent; color: var(--ink); cursor: pointer; }
