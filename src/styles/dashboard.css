@@ -85,3 +85,30 @@ body:has(dialog[open]) { overflow: hidden; }
 .reported-markets span, .markets-disclosure { color: #a8b4ca; }
 .markets-disclosure { margin-top: 8px; font-size: .8rem; line-height: 1.6; }
 .reported-markets a:hover { color: #8cf4ea; }
+.site-header { column-gap: 28px; padding-inline: 24px; }
+.site-header .brand { gap: 8px; letter-spacing: 0; white-space: nowrap; }
+.primary-nav { gap: 20px; min-width: 0; }
+.primary-nav a { white-space: nowrap; font-size: .85rem; }
+.dashboard-overview { padding-top: 24px; }
+.dashboard-brand-banner { position: relative; isolation: isolate; min-height: 260px; display: flex; align-items: center; overflow: hidden; margin-bottom: 20px; background: #060818; }
+.dashboard-brand-banner > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 64%; z-index: -2; }
+.dashboard-brand-copy { padding: 28px 32px; max-width: 520px; text-shadow: 0 2px 6px #060818, 0 0 20px #060818; }
+.dashboard-brand-copy h1 { font-size: 2.5rem; margin: 8px 0; }
+.dashboard-brand-copy p { margin: 0 0 10px; }
+.dashboard-brand-copy span { color: #c8d5e8; font-size: .8rem; }
+.public-metrics-caption { color: var(--muted); font-size: .85rem; margin: 0 0 20px; }
+@media (min-width: 901px) and (max-width: 1399px) {
+  .site-header { grid-template-columns: auto 1fr auto; }
+  .menu-toggle { display: grid; gap: 5px; width: 44px; height: 44px; place-content: center; justify-self: end; border: 0; background: transparent; color: var(--ink); }
+  .menu-toggle span:not(.sr-only) { display: block; width: 22px; height: 2px; background: currentColor; }
+  .primary-nav { position: absolute; inset: 78px 0 auto; display: none; flex-direction: column; padding: 12px 24px; background: var(--page); border-bottom: 1px solid var(--line); }
+  .primary-nav.open { display: flex; }
+  .primary-nav a { min-height: 44px; }
+}
+@media (max-width: 767px) {
+  .site-header { column-gap: 10px; }
+  .dashboard-brand-banner { min-height: 230px; }
+  .dashboard-brand-banner > img { object-position: 60% center; }
+  .dashboard-brand-copy { padding: 20px; max-width: 290px; }
+  .dashboard-brand-copy h1 { font-size: 2rem; }
+}

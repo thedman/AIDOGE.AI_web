@@ -14,7 +14,11 @@ export function TokenDashboard() {
     : stats.owner.toLowerCase() === zeroAddress ? 'Renounced' : 'Owner set'
   const failed = stats.isError || stats.incomplete
   return <section className="stats-section dashboard-overview" id="overview" aria-labelledby="stats-title">
-    <div className="section-heading compact"><p className="section-label">Arbitrum One · Read-only</p><h1 id="stats-title">ArbDoge.AI</h1><p>Public token supply and ownership data. Circulating supply is total supply minus the dead-wallet balance.</p></div>
+    <div className="dashboard-brand-banner">
+      <img src="assets/background2.jpg" alt="AIDOGE overlooking the neon-lit ArbCity skyline" width="3840" height="1880" fetchPriority="high" />
+      <div className="dashboard-brand-copy"><p className="section-label">Arbitrum One · Community ecosystem</p><h1 id="stats-title">ArbDoge.AI</h1><p>AIDOGE. Our community, on-chain.</p><span>Read-only dashboard</span></div>
+    </div>
+    <p className="public-metrics-caption">Public token supply and ownership data. Circulating supply is total supply minus the dead-wallet balance.</p>
     <div className="stats-grid" aria-busy={stats.isFetching}>
       <MetricCard label="Total supply" value={amount(stats.totalSupply)} detail={exact(stats.totalSupply)} />
       <MetricCard label="Dead-wallet balance" value={amount(stats.burnBalance)} detail={exact(stats.burnBalance)} />
