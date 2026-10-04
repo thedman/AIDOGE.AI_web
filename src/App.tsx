@@ -47,7 +47,7 @@ export default function App() {
       <div className="hero-content">
         <p className="eyebrow">Proudly launched on Arbitrum</p>
         <h2 id="hero-title">Co-built by AI creatures and our community</h2>
-        <p className="hero-copy">AIDOGE.AI was an experimental community ecosystem built around AIDOGE, AICODE, NFTs, staking and on-chain applications.</p>
+        <p className="hero-copy">AIDOGE.AI is an experimental community ecosystem built around AIDOGE, AICODE, NFTs, staking and on-chain applications.</p>
         <div className="hero-actions">
           <a className="button button-primary" href="#token">Explore AIDOGE</a>
           <a className="button button-secondary" href="https://web.archive.org/web/20241114003227/https://arbdoge.ai/" target="_blank" rel="noopener noreferrer">View archived site</a>
