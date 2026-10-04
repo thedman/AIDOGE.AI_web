@@ -3,6 +3,7 @@ import { ExternalLink } from 'lucide-react'
 import { poolAddress, usePoolStats } from '../hooks/usePoolStats'
 import { MetricCard, formatTokenAmount } from './MetricCard'
 import { useUsdSpot } from '../hooks/useUsdSpot'
+import { DexPoolChart } from './DexPoolChart'
 
 export function PoolDashboard() {
   const stats = usePoolStats()
@@ -27,5 +28,6 @@ export function PoolDashboard() {
       <a href="https://coinmarketcap.com/currencies/arbdoge-ai/#Markets" target="_blank" rel="noopener noreferrer" aria-label="View reported AIDOGE markets on CoinMarketCap (opens in new tab)">View on CoinMarketCap <ExternalLink size={16} aria-hidden="true" /></a>
     </div>
     <p className="markets-disclosure">Third-party listings are informational, not an endorsement or liquidity recommendation. All dashboard write actions remain on HOLD.</p>
+    <DexPoolChart />
   </div>
 }
