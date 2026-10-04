@@ -112,3 +112,4 @@ body:has(dialog[open]) { overflow: hidden; }
   .dashboard-brand-copy { padding: 20px; max-width: 290px; }
   .dashboard-brand-copy h1 { font-size: 2rem; }
 }
+.pool-raw-ratio { font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
