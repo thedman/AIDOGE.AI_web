@@ -1,5 +1,6 @@
 import { AIDOGE_ADDRESS } from '../abi/aidogeAbi'
 import { rewarders } from '../abi/rewarderAbi'
+import { vaults, vaultImplementation } from '../abi/vaultAbi'
 import type { ContractSecurityAudit } from '../types/forensics'
 
 const unknown = {
@@ -33,13 +34,20 @@ export const contractAudits: ContractSecurityAudit[] = [
   })),
   ...([
     ['AICODE token', '0x7c8121661a9222c3d39b8806db6a5e0a02f0b9c7'],
-    ['Staking / vault', '0xd648e83d0b02888d1b2c1e41b53cb83c663d70ee'],
+    ['Rejected vault candidate (historical reference)', '0xd648e83d0b02888d1b2c1e41b53cb83c663d70ee'],
     ['Camelot LP candidate', '0x296f8664585e135d7be243fee12180a4e349277a'],
   ] as const).map(([contractName, address]): ContractSecurityAudit => ({
     ...unknown, contractName, address, readStatus: 'HOLD', bytecodeBytes: 0,
     provenance: 'User-supplied candidate; claimed deployment linkage remains unverified.',
     rationale: 'No bytecode on Arbitrum One at this candidate address on either checked RPC endpoint. Contract identity and ABI are unconfirmed.',
     verifiedReadMethods: [], checkedAt: '2026-10-03',
+  })),
+  ...vaults.map((vault): ContractSecurityAudit => ({
+    ...unknown, contractName: `${vault.name} Vault V2`, address: vault.address,
+    isProxy: true, implementationAddress: vaultImplementation,
+    provenance: 'Recovered reward-trace interface; ERC-1967 implementation/admin and locks(address) responses checked at Arbitrum block 0x1e7b9ac0 on 2026-10-03.',
+    readStatus: 'GO', verifiedReadMethods: ['locks'], checkedAt: '2026-10-03',
+    rationale: 'GO only for guarded principal and UTC expiry reads. Both vault implementation/admin checks precede position queries at a pinned block. Source verification, withdrawal penalties and write safety remain unconfirmed; writes HOLD.',
   })),
   {
     ...unknown, contractName: 'ARB distribution candidate', address: '0x912ce59144191c1204e64559fe8253a0e49e6548',
