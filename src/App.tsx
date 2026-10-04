@@ -14,9 +14,9 @@ export default function App() {
   <a className="skip-link" href="#main">Skip to content</a>
 
   <header className="site-header" id="home">
-    <a className="brand" href="#home" aria-label="ArbDoge home">
-      <img src="assets/logo.svg" alt="" width="52" height="52" />
-      <span>ARBDOGE</span>
+    <a className="brand" href="#home" aria-label="AIDOGE.AI home">
+      <span className="brand-badge" aria-hidden="true"><img src="assets/logo.svg" alt="" width="174" height="48" /></span>
+      <span>AIDOGE.AI</span>
     </a>
 
     <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} type="button" aria-expanded={menuOpen} aria-controls="primary-nav">
@@ -47,7 +47,7 @@ export default function App() {
       <div className="hero-content">
         <p className="eyebrow">Proudly launched on Arbitrum</p>
         <h2 id="hero-title">Co-built by AI creatures and our community</h2>
-        <p className="hero-copy">ArbDoge.AI was an experimental community ecosystem built around AIDOGE, AICODE, NFTs, staking and on-chain applications.</p>
+        <p className="hero-copy">AIDOGE.AI was an experimental community ecosystem built around AIDOGE, AICODE, NFTs, staking and on-chain applications.</p>
         <div className="hero-actions">
           <a className="button button-primary" href="#token">Explore AIDOGE</a>
           <a className="button button-secondary" href="https://web.archive.org/web/20241114003227/https://arbdoge.ai/" target="_blank" rel="noopener noreferrer">View archived site</a>
@@ -69,7 +69,7 @@ export default function App() {
       <div className="section-heading">
         <p className="section-label">The ecosystem token</p>
         <h2 id="token-title">What is AIDOGE?</h2>
-        <p>AIDOGE is a deflationary token created for applications in the ArbDoge.AI ecosystem. Its original supply was 210 quadrillion tokens, distributed around a community-first experiment on Arbitrum.</p>
+        <p>AIDOGE is a deflationary token created for applications in the AIDOGE.AI ecosystem. Its original supply was 210 quadrillion tokens, distributed around a community-first experiment on Arbitrum.</p>
       </div>
 
       <div className="token-layout">
@@ -116,7 +116,7 @@ export default function App() {
     <section className="content-section ecosystem-section" id="ecosystem" aria-labelledby="ecosystem-title">
       <div className="section-heading">
         <p className="section-label">Products and experiments</p>
-        <h2 id="ecosystem-title">The ArbDoge.AI ecosystem</h2>
+        <h2 id="ecosystem-title">The AIDOGE.AI ecosystem</h2>
         <p>The original experience connected token holders to staking, governance, NFTs and planned AI-native products.</p>
       </div>
 
@@ -166,8 +166,8 @@ export default function App() {
 
   <footer className="site-footer">
     <div className="footer-brand">
-      <a className="brand" href="#home"><img src="assets/logo.svg" alt="" width="44" height="44" /><span>ARBDOGE</span></a>
-      <p>ArbDogeAI, an experiment in the Arbitrum ecosystem.</p>
+      <a className="brand" href="#home"><span className="brand-badge" aria-hidden="true"><img src="assets/logo.svg" alt="" width="174" height="48" /></span><span>AIDOGE.AI</span></a>
+      <p>AIDOGE.AI, an experiment in the Arbitrum ecosystem.</p>
     </div>
     <div>
       <h2>Resources</h2>

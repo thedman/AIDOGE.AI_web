@@ -16,7 +16,7 @@ export function TokenDashboard() {
   return <section className="stats-section dashboard-overview" id="overview" aria-labelledby="stats-title">
     <div className="dashboard-brand-banner">
       <img src="assets/background2.jpg" alt="AIDOGE overlooking the neon-lit ArbCity skyline" width="3840" height="1880" fetchPriority="high" />
-      <div className="dashboard-brand-copy"><p className="section-label">Arbitrum One · Community ecosystem</p><h1 id="stats-title">ArbDoge.AI</h1><p>AIDOGE. Our community, on-chain.</p><span>Read-only dashboard</span></div>
+      <div className="dashboard-brand-copy"><p className="section-label">Arbitrum One · Community ecosystem</p><h1 id="stats-title">AIDOGE.AI</h1><p>AIDOGE. Our community, on-chain.</p><span>Read-only dashboard</span></div>
     </div>
     <p className="public-metrics-caption">Public token supply and ownership data. Circulating supply is total supply minus the dead-wallet balance.</p>
     <div className="stats-grid" aria-busy={stats.isFetching}>
