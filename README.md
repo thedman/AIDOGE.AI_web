@@ -41,6 +41,8 @@ Submit `https://thedman.github.io/AIDOGE.AI_web/sitemap.xml` directly in Search 
 
 ## Contract forensics status
 
+Historical NFT Prologue Ethereum Mainnet references are recorded separately in [the manual investigation guide](docs/nft-prologue-mainnet-reference.md). Contract identity remains unverified, and the supplied unstake selector conflicts with `unstake(uint256)`. These references do not enable dashboard writes or Ethereum wallet interactions.
+
 - AIDOGE token: `0x09E18590E8f76b6Cf471b3cd75fE1A1a9D2B2c2b`
 - Verified read calls in this reconstruction: `decimals()`, `totalSupply()`, `balanceOf(0x000000000000000000000000000000000000dEaD)`, and `owner()`.
 - `owner()` currently returns the zero address when read from Arbitrum One.
