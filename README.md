@@ -13,6 +13,24 @@ npm run dev -- --host 127.0.0.1 --port 5173
 
 Then open `http://127.0.0.1:5173/AIDOGE.AI_web/`. Run `npm run build` for TypeScript validation and a production build. `npm run preview` serves the build at the same repository subpath.
 
+## Optional GA4 analytics
+
+Set `VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX` in an ignored `.env.local` for local builds, or add the same repository variable under GitHub Settings > Secrets and variables > Actions > Variables for Pages. Rebuild/redeploy after changing it; Vite embeds this public ID at build time. Missing or invalid IDs disable analytics entirely.
+
+Before enabling, turn OFF Enhanced Measurement in the GA4 web data stream. This app sends pageviews manually; automatic history pageviews would duplicate them, and automatic outbound-click/form events could collect URLs or state outside the intended scope. Do not add another Google tag, Google Signals, user-provided data collection, or automatic event rules that collect wallet information.
+
+Only the initial page and changes between allowlisted hash sections generate pageviews. Query strings, unknown hashes and referrers are excluded; titles are fixed section labels. Wallet addresses, balances, account/network changes, approvals and transaction data are never passed by the tracker. Referrer omission deliberately limits referral attribution. Analytics remains third-party tracking: GA4 may use cookies and browser/device metadata. `anonymize_ip: true` is included, but GA4 already does not log/store IP addresses; this setting is not a consent or compliance guarantee. Arrange appropriate privacy disclosure and consent controls for your audience before enabling analytics.
+
+Use GA4 Realtime/DebugView or Tag Assistant after deployment to verify receipt. No measurement ID is configured by default, and unit tests mock the tag queue without contacting Google. Ad blockers may prevent collection. All dashboard writes remain on HOLD.
+
+## Google Search Console
+
+Create a URL-prefix property for `https://thedman.github.io/AIDOGE.AI_web/` and select HTML tag verification. Set just the tag's `content` value as `VITE_GSC_VERIFICATION_TOKEN` in `.env.local` or the GitHub Actions repository variables. Vite inserts it into the static HTML head at build time, without requiring JavaScript execution. Empty tokens omit the tag. Rebuild and deploy, check View Source for `google-site-verification`, then click Verify in Search Console. Keep the token configured for future verification checks.
+
+Submit `https://thedman.github.io/AIDOGE.AI_web/sitemap.xml` directly in Search Console. It lists the canonical homepage only: hash anchors such as `#vaults` do not represent separate pages. A sitemap helps discovery but does not guarantee indexing.
+
+`public/robots.txt` permits crawling and references the sitemap. Important: this project deploys it at `/AIDOGE.AI_web/robots.txt`, whereas crawlers use `https://thedman.github.io/robots.txt`. The subpath file does NOT override domain-root crawl rules. If root rules block this project, update the root site's robots file separately; submitting the sitemap does not override a Disallow rule.
+
 ## Scope
 
 - Reconstructs the public homepage, navigation, token overview, tokenomics, statistics, ecosystem cards, and footer.

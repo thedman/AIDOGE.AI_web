@@ -1,8 +1,15 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
+import { searchConsoleTags } from './src/config/searchConsole'
 
-export default defineConfig({
-  plugins: [react()],
+export default defineConfig(({ mode }) => ({
+  plugins: [react(), {
+    name: 'search-console-verification',
+    transformIndexHtml() {
+      const env = loadEnv(mode, '.', 'VITE_')
+      return searchConsoleTags(env.VITE_GSC_VERIFICATION_TOKEN)
+    },
+  }],
   base: '/AIDOGE.AI_web/',
   build: {
     rollupOptions: {
@@ -21,4 +28,4 @@ export default defineConfig({
       },
     },
   },
-})
+}))

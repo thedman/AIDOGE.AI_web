@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://thedman.github.io/AIDOGE.AI_web/sitemap.xml
