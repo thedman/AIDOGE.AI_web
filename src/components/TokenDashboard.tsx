@@ -2,6 +2,7 @@ import { RefreshCw } from 'lucide-react'
 import { formatUnits, zeroAddress } from 'viem'
 import { useAidogeStats } from '../hooks/useAidogeStats'
 import { MetricCard, formatTokenAmount } from './MetricCard'
+import { PoolDashboard } from './PoolDashboard'
 
 export function TokenDashboard() {
   const stats = useAidogeStats()
@@ -26,5 +27,6 @@ export function TokenDashboard() {
       </p>
       <button className="refresh-button" type="button" title="Refresh token data" aria-label="Refresh token data" disabled={stats.isFetching} onClick={() => void stats.refetch()}><RefreshCw size={18} className={stats.isFetching ? 'refreshing' : ''} /></button>
     </div>
+    <PoolDashboard />
   </section>
 }
