@@ -18,7 +18,7 @@ export function VaultDashboard() {
           <div><dt>Claimable rewards</dt><dd>Unavailable</dd></div>
         </dl>
       </article>)}</div><p role="status">Block {state.data.blockNumber.toString()}{state.isFetching ? ' - refreshing' : ''}</p></>}
-    <p>Claims, deposits and withdrawals remain on HOLD. Early withdrawal penalties and exact claimable payouts have not been verified.</p>
+    <p>Claims, deposits and withdrawals remain on HOLD. Early withdrawal may substantially reduce the tokens returned. The penalty formula, maximum deduction and calldata parameter meaning remain unverified. Exact claimable payouts have not been verified.</p>
     <RewardEstimates />
   </section>
 }

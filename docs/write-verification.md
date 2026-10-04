@@ -31,6 +31,8 @@ Status: HOLD. Candidate interfaces are modeling-only and are not wired to transa
 
 ## Evidence to collect first
 
+The user-supplied October 4 Dedaub excerpt labels earlyWithdraw's uint256 argument `_minAmount`. Its semantics remain unverified: do not treat the candidate ABI's parameter name as proof that it is a withdrawal quantity or minimum payout. The excerpt is incomplete and does not establish final execution success or balance/state reconciliation. Local assessments and raw receipts remain under ignored `reports/`; full traces must include block, sender and override metadata. Historical calldata 3000000000000000000 is not interchangeable with the simulator input 3000000000000.
+
 Obtain Dedaub implementation decompilation and full simulation traces for both V2 proxies and the claim router. Record chain ID, pinned block/hash, proxy implementation/admin slots, runtime code hashes, caller, target, calldata, value, logs and state diffs. Existing historical receipts can validate claims but cannot replace current-state checks.
 
 ## Fork protocol
