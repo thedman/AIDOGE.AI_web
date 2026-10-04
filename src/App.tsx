@@ -151,6 +151,7 @@ export default function App() {
         <div className="resource-links">
           <a href="https://x.com/ArbDoge_AI" target="_blank" rel="noopener noreferrer">X / Twitter</a>
           <a href="https://medium.com/@ArbDogeAI" target="_blank" rel="noopener noreferrer">Medium</a>
+          <a href="https://discord.gg/ZvANqJzPm" target="_blank" rel="noopener noreferrer">Discord</a>
           <a href="https://web.archive.org/web/20241114003228/https://docs.arbdoge.ai/" target="_blank" rel="noopener noreferrer">Whitepaper archive</a>
         </div>
       </div>
