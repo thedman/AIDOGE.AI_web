@@ -34,7 +34,9 @@ export async function observe() {
   const version = await publicClient.request({ method: 'web3_clientVersion' })
   if (!version.toLowerCase().includes('anvil')) throw new Error('Endpoint is not Anvil')
   const info = await publicClient.request({ method: 'anvil_nodeInfo' })
-  if (Number(info.forkConfig?.forkBlockNumber) !== Number(pin) || Number(info.forkConfig?.forkChainId) !== 42161) throw new Error('Pinned Arbitrum fork metadata mismatch')
+  const reportedChainId = info.forkConfig?.forkChainId ?? info.environment?.chainId
+  if (Number(info.forkConfig?.forkBlockNumber) !== Number(pin) || Number(reportedChainId) !== 42161
+    || await publicClient.getChainId() !== 42161) throw new Error('Pinned Arbitrum fork metadata mismatch')
   const block = await publicClient.getBlock()
   if (block.number !== BigInt(pin)) throw new Error('Use a fresh fork at the requested block')
   const implementationRaw = await publicClient.getStorageAt({ address: target.vault, slot })
@@ -66,15 +68,40 @@ export async function observe() {
       const after = await balance(address, receipt.blockNumber)
       deltas.push({ address, before, after, delta: after - before })
     }
+    const tokenAccounting = []
+    const transferTopic = '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'
+    const tokenParticipants = new Map()
+    for (const log of receipt.logs.filter(log => log.topics[0] === transferTopic)) {
+      try {
+        const event = decodeEventLog({ abi: tokenAbi, data: log.data, topics: log.topics })
+        const token = log.address.toLowerCase()
+        const accounts = tokenParticipants.get(token) ?? new Set()
+        accounts.add(event.args.from.toLowerCase()).add(event.args.to.toLowerCase())
+        tokenParticipants.set(token, accounts)
+      } catch { /* Non-ERC20 Transfer shapes remain preserved in the raw receipt. */ }
+    }
+    for (const [token, accounts] of tokenParticipants) {
+      for (const address of accounts) {
+        try {
+          const read = blockNumber => publicClient.readContract({ address: token, abi: tokenAbi, functionName: 'balanceOf', args: [address], blockNumber })
+          const before = await read(block.number)
+          const after = await read(receipt.blockNumber)
+          tokenAccounting.push({ token, address, before, after, delta: after - before })
+        } catch { tokenAccounting.push({ token, address, unavailable: true }) }
+      }
+    }
     const traces = {}
-    for (const [name, options] of Object.entries({ calls: { tracer: 'callTracer' }, stateDiff: { tracer: 'prestateTracer', tracerConfig: { diffMode: true } } })) {
+    for (const [name, options] of Object.entries({ calls: { tracer: 'callTracer', tracerConfig: { withLog: true } }, stateDiff: { tracer: 'prestateTracer', tracerConfig: { diffMode: true } } })) {
       try { traces[name] = await publicClient.request({ method: 'debug_traceTransaction', params: [hash, options] }) }
       catch (error) { traces[name] = { unavailable: error.message } }
     }
-    report = { target, holder, pin, blockHash: block.hash, timestamp: block.timestamp, implementation, bytecode, calldata, hash, receipt, pre, preLock, postLock: await lock(), transfers, deltas, traces, qualification: 'Observed local-fork behavior only; no penalty formula or safety assertions.' }
+    report = { target, holder, pin, blockHash: block.hash, timestamp: block.timestamp, implementation, bytecode, calldata, hash, receipt, pre, preLock, postLock: await lock(), transfers, deltas, tokenAccounting, traces, qualification: 'Observed local-fork behavior only; no penalty formula or safety assertions.' }
   } finally {
     try { await client.stopImpersonatingAccount({ address: holder }) }
-    finally { if (!await client.revert({ id: snapshot })) throw new Error('Fork snapshot restoration failed') }
+    finally {
+      await client.revert({ id: snapshot })
+      if ((await publicClient.getBlock()).hash !== block.hash) throw new Error('Fork snapshot restoration failed')
+    }
   }
   await mkdir('reports/fork', { recursive: true })
   const path = `reports/fork/${process.env.FORK_TARGET}-${pin}-${hash}.json`

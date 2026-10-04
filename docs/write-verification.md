@@ -2,7 +2,7 @@
 
 ## Observational harness
 
-`npm run observe:fork` runs `scripts/fork-observation.mjs` separately from the frontend. Requires an installed Anvil and a fresh Arbitrum fork. No Anvil installation or fork execution has been performed here.
+`npm run observe:fork` runs `scripts/fork-observation.mjs` separately from the frontend. Requires Anvil and a fresh Arbitrum fork. A Windows Anvil 1.7.1 observation was completed at block 511692613; see [the evidence bundle](evidence-bundles/aidoge_earlyWithdraw.md) and its adjacent raw JSON.
 
 Start Anvil bound only to loopback, with mining only on submitted transactions:
 
@@ -31,6 +31,14 @@ Status: HOLD. Candidate interfaces are modeling-only and are not wired to transa
 
 ## Evidence to collect first
 
+### Observed early-exit risk and UI integration requirements
+
+At pinned block 511692613, an AIDOGE V2 local-fork call with input 1000000000 raw units reduced principal by 1000 AIDOGE and credited only 59.2 AIDOGE to the holder. Direct non-user transfers totaled 940.8 AIDOGE: an observed 94.08% deduction. Do not label the entire spread as token tax, assume a universal penalty ceiling, or extrapolate this sampled result to other holders or timestamps.
+
+In this run the input matched gross principal unstaked, not minimum net tokens received: the call succeeded despite user credit being below the input. General parameter semantics and all bytecode checks still require implementation analysis; a decompiler parameter label is not authoritative.
+
+All vault exit methods remain HOLD. Before any future earlyWithdraw UI integration is considered, its specification must require an explicit Net Received Warning showing an evidence-backed expected net payout, principal debit, deductions and uncertainty. A warning or client-side calculation alone is not payout protection: review verified contract-enforced bounds (if available), timestamp sensitivity, proxy/current-state changes, and any absence of minimum-received enforcement. No executable control is enabled by this specification.
+
 The user-supplied October 4 Dedaub excerpt labels earlyWithdraw's uint256 argument `_minAmount`. Its semantics remain unverified: do not treat the candidate ABI's parameter name as proof that it is a withdrawal quantity or minimum payout. The excerpt is incomplete and does not establish final execution success or balance/state reconciliation. Local assessments and raw receipts remain under ignored `reports/`; full traces must include block, sender and override metadata. Historical calldata 3000000000000000000 is not interchangeable with the simulator input 3000000000000.
 
 Obtain Dedaub implementation decompilation and full simulation traces for both V2 proxies and the claim router. Record chain ID, pinned block/hash, proxy implementation/admin slots, runtime code hashes, caller, target, calldata, value, logs and state diffs. Existing historical receipts can validate claims but cannot replace current-state checks.
@@ -47,4 +55,4 @@ Use a local Anvil fork pinned to that evidence block. Impersonation and test fun
 
 The reference wallet and synthetic accounts should cover active/expired/empty positions, zero rewards, mixed-token rewards, and failed rewarders. Tests validate sampled states, not future proxy behavior or complete contract safety.
 
-No evidence bundle or state-diff provider was supplied in this pass. No Anvil test was executed and no write capability was enabled. A subsequent write release requires explicit review and an updated MetaMask submission.
+The saved evidence bundle contains a successful local transaction, available call/state-diff trees and balance reconciliation. It does not prove trace completeness, the full arithmetic or future contract safety. No write capability was enabled. A subsequent write release requires explicit review and an updated MetaMask submission.
