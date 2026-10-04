@@ -4,6 +4,7 @@ import { useVaultPositions } from '../hooks/useVaultPositions'
 import { RewardEstimates } from './RewardEstimates'
 import { Wallet } from 'lucide-react'
 import { ManualInteractionGuide } from './ManualInteractionGuide'
+import { VaultWriteModal } from './VaultWriteModal'
 
 export function VaultDashboard({ onConnect }: { onConnect?: () => void }) {
   const state = useVaultPositions()
@@ -25,6 +26,6 @@ export function VaultDashboard({ onConnect }: { onConnect?: () => void }) {
       </article>)}</div><p role="status">Block {state.data.blockNumber.toString()}{state.isFetching ? ' - refreshing' : ''}</p></>}
     <RewardEstimates />
     <p className="vault-disclosure">Claims, deposits and withdrawals remain on HOLD. Early withdrawal may substantially reduce the tokens returned. The penalty formula, maximum deduction and calldata parameter meaning remain unverified. Exact claimable payouts have not been verified.</p>
-    <ManualInteractionGuide />
+    <div className="vault-guide-actions"><ManualInteractionGuide /><VaultWriteModal /></div>
   </section>
 }

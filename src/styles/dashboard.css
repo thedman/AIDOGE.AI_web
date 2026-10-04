@@ -137,3 +137,13 @@ body:has(dialog[open]) { overflow: hidden; }
   .primary-nav { top: 76px; }
   .vault-community-art { height: 150px; }
 }
+.vault-review { width: min(640px, calc(100% - 32px)); max-height: 85vh; overflow-y: auto; }
+.vault-review label { display: block; margin: 16px 0; }
+.vault-review input:not([type="checkbox"]) { display: block; width: 100%; box-sizing: border-box; padding: 12px; background: #11182d; color: #f3f5ff; border: 1px solid #53617a; border-radius: 4px; font: inherit; font-variant-numeric: tabular-nums; }
+.vault-review input:focus-visible, .vault-review button:focus-visible { outline: 2px solid #00d3c6; outline-offset: 3px; }
+.vault-review dd { overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.vault-review button { min-height: 44px; }
+.vault-review button:not(.wallet-close) { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; background: #00d3c6; color: #05091b; border: 1px solid #00d3c6; border-radius: 4px; font: inherit; }
+.vault-review button:disabled { background: #192136; color: #b8c4da; border-color: #53617a; cursor: not-allowed; }
+.vault-guide-actions { display: flex; gap: 8px 24px; flex-wrap: wrap; align-items: center; }
+.vault-review select { display: block; width: 100%; min-height: 44px; margin-top: 6px; background: #11182d; color: #f3f5ff; border: 1px solid #53617a; border-radius: 4px; font: inherit; padding: 8px; }
